@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de contatos!</title>
+</head>
+<body>
+    <h1>Grupos!</h1>
+
+    <h2>Adicionar Grupo</h2>
+    <form action="/add_grupos" method="POST">
+        <label for="nome_grupo">Nome do Grupo:</label>
+        <input type="text" id="nome_grupo" name="nome_grupo">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Adicionar contato a um grupo</h2>
+    <form action="/add_contato_grupos" method="POST">
+        <label for="telefone">Telefone do contato:</label>
+        <input type="telefone" id="telefone" name="telefone" required><br><br>
+        <label for="grupo">Escolha um grupo:</label>
+        <select id="grupo" name="grupo">
+            {% for grupo in grupos %}
+            <option value="{{ grupo[0] }}">{{ grupo[1] }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Verificar contatos de um grupo!</h2>
+    <form action="/verificar_contatos" method="POST">
+        <label for="grupo_id">Escolha um grupo:</label>
+        <select id="grupo_id" name="grupo_id">
+            {% for grupo in grupos %}
+            <option value="{{ grupo[0] }}">{{ grupo[1] }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Verificar!</button>
+    </form>
+    <br>
+    <ul>
+        {% for contato in contatos %}
+        <li>{{ contato[0] }} - {{ contato[1] }} - {{ contato[2] }} - {{ contato[3] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
